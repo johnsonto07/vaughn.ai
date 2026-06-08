@@ -1,6 +1,10 @@
 const form = document.querySelector("#chat-form");
 const input = document.querySelector("#message-input");
 const messagesEl = document.querySelector("#messages");
+const introView = document.querySelector("#intro-view");
+const chatView = document.querySelector("#chat-view");
+const startChatButton = document.querySelector("#start-chat");
+const backButton = document.querySelector("#back-button");
 
 const history = [];
 
@@ -8,14 +12,10 @@ function addMessage(role, content) {
   const article = document.createElement("article");
   article.className = `message ${role === "user" ? "user" : "bot"}`;
 
-  const avatar = document.createElement("div");
-  avatar.className = "avatar";
-  avatar.textContent = role === "user" ? "You" : "V";
-
   const bubble = document.createElement("p");
   bubble.textContent = content;
 
-  article.append(avatar, bubble);
+  article.append(bubble);
   messagesEl.append(article);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
@@ -24,6 +24,20 @@ function setWaiting(waiting) {
   form.querySelector("button").disabled = waiting;
   input.disabled = waiting;
 }
+
+function showChat() {
+  introView.classList.add("is-hidden");
+  chatView.classList.remove("is-hidden");
+  input.focus();
+}
+
+function showIntro() {
+  chatView.classList.add("is-hidden");
+  introView.classList.remove("is-hidden");
+}
+
+startChatButton.addEventListener("click", showChat);
+backButton.addEventListener("click", showIntro);
 
 input.addEventListener("input", () => {
   input.style.height = "auto";
