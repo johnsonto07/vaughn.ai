@@ -3,42 +3,45 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vaughn Bot</title>
+    <title>vaughn.ai</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <main class="app-shell">
-      <section class="chat-panel" aria-label="Vaughn Bot chat">
-        <header class="chat-header">
-          <div>
-            <p class="eyebrow">AI friend profile</p>
-            <h1>Vaughn Bot</h1>
+      <section id="intro-view" class="intro-view" aria-label="vaughn.ai intro">
+        <div class="intro-card">
+          <div class="photo-placeholder" aria-label="Vaughn photo placeholder">
+            <span>Photo</span>
           </div>
-          <div class="status-pill" aria-label="Bot status">
-            <span></span>
-            Online-ish
+          <div class="intro-copy">
+            <h1>vaughn.ai</h1>
+            <p>
+              Placeholder description for Vaughn. Add the real description here when you send it over.
+            </p>
+            <button id="start-chat" type="button">Next</button>
           </div>
-        </header>
-
-        <div class="profile-strip" aria-label="Vaughn Bot interests">
-          <span>Homework help</span>
-          <span>LOTR</span>
-          <span>Spinosaurus</span>
-          <span>Mormonism</span>
-          <span>MJ GOAT takes</span>
-          <span>Raptors</span>
         </div>
+      </section>
+
+      <section id="chat-view" class="chat-view is-hidden" aria-label="vaughn.ai chat">
+        <header class="phone-header">
+          <button id="back-button" class="back-button" type="button" aria-label="Back to profile">&lsaquo;</button>
+          <div class="contact">
+            <div class="contact-avatar">V</div>
+            <strong>vaughn.ai</strong>
+          </div>
+          <div class="header-spacer"></div>
+        </header>
 
         <div id="messages" class="messages" aria-live="polite">
           <article class="message bot">
-            <div class="avatar">V</div>
-            <p>Yo, I’m Vaughn Bot. I can help with homework, talk hoops, dinosaurs, Lord of the Rings, or answer Mormonism questions. If you ask me quantum wizardry past freshman year, I may be cooked, but we’ll figure out what we can.</p>
+            <p>Yo, I'm vaughn.ai. Ask me about homework, hoops, dinosaurs, Lord of the Rings, or Mormonism.</p>
           </article>
         </div>
 
         <form id="chat-form" class="composer">
-          <label class="sr-only" for="message-input">Message Vaughn Bot</label>
-          <textarea id="message-input" name="message" rows="1" placeholder="Ask Vaughn Bot something..." required></textarea>
+          <label class="sr-only" for="message-input">Message vaughn.ai</label>
+          <textarea id="message-input" name="message" rows="1" placeholder="iMessage" required></textarea>
           <button type="submit">Send</button>
         </form>
       </section>
