@@ -1,0 +1,73 @@
+const form = document.querySelector("#chat-form");
+const input = document.querySelector("#message-input");
+const messagesEl = document.querySelector("#messages");
+
+const history = [];
+
+function addMessage(role, content) {
+  const article = document.createElement("article");
+  article.className = `message ${role === "user" ? "user" : "bot"}`;
+
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = role === "user" ? "You" : "V";
+
+  const bubble = document.createElement("p");
+  bubble.textContent = content;
+
+  article.append(avatar, bubble);
+  messagesEl.append(article);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function setWaiting(waiting) {
+  form.querySelector("button").disabled = waiting;
+  input.disabled = waiting;
+}
+
+input.addEventListener("input", () => {
+  input.style.height = "auto";
+  input.style.height = `${input.scrollHeight}px`;
+});
+
+input.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    form.requestSubmit();
+  }
+});
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const content = input.value.trim();
+  if (!content) return;
+
+  input.value = "";
+  input.style.height = "auto";
+  history.push({ role: "user", content });
+  addMessage("user", content);
+  addMessage("assistant", "Thinking...");
+  const thinkingBubble = messagesEl.lastElementChild.querySelector("p");
+
+  setWaiting(true);
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Something went wrong.");
+
+    thinkingBubble.textContent = data.reply;
+    history.push({ role: "assistant", content: data.reply });
+  } catch (error) {
+    thinkingBubble.textContent = `${error.message} Add your API key on the server and try again.`;
+  } finally {
+    setWaiting(false);
+    input.focus();
+  }
+});

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vaughn Bot</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="chat-panel" aria-label="Vaughn Bot chat">
+        <header class="chat-header">
+          <div>
+            <p class="eyebrow">AI friend profile</p>
+            <h1>Vaughn Bot</h1>
+          </div>
+          <div class="status-pill" aria-label="Bot status">
+            <span></span>
+            Online-ish
+          </div>
+        </header>
+
+        <div class="profile-strip" aria-label="Vaughn Bot interests">
+          <span>Homework help</span>
+          <span>LOTR</span>
+          <span>Spinosaurus</span>
+          <span>Mormonism</span>
+          <span>MJ GOAT takes</span>
+          <span>Raptors</span>
+        </div>
+
+        <div id="messages" class="messages" aria-live="polite">
+          <article class="message bot">
+            <div class="avatar">V</div>
+            <p>Yo, I’m Vaughn Bot. I can help with homework, talk hoops, dinosaurs, Lord of the Rings, or answer Mormonism questions. If you ask me quantum wizardry past freshman year, I may be cooked, but we’ll figure out what we can.</p>
+          </article>
+        </div>
+
+        <form id="chat-form" class="composer">
+          <label class="sr-only" for="message-input">Message Vaughn Bot</label>
+          <textarea id="message-input" name="message" rows="1" placeholder="Ask Vaughn Bot something..." required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
