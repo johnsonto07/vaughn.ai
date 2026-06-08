@@ -26,14 +26,19 @@ function setWaiting(waiting) {
 }
 
 function showChat() {
-  introView.classList.add("is-hidden");
-  chatView.classList.remove("is-hidden");
-  input.focus();
+  introView.classList.remove("is-active");
+  introView.setAttribute("aria-hidden", "true");
+  chatView.classList.add("is-active");
+  chatView.removeAttribute("aria-hidden");
+  window.setTimeout(() => input.focus(), 320);
 }
 
 function showIntro() {
-  chatView.classList.add("is-hidden");
-  introView.classList.remove("is-hidden");
+  chatView.classList.remove("is-active");
+  chatView.setAttribute("aria-hidden", "true");
+  introView.classList.add("is-active");
+  introView.removeAttribute("aria-hidden");
+  window.setTimeout(() => startChatButton.focus(), 320);
 }
 
 startChatButton.addEventListener("click", showChat);
